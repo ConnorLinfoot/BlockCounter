@@ -1,0 +1,4 @@
+name: BlockCounter
+description: BlockCounter
+main: com.connorlinfoot.blockcounter.Main
+version: 1.0
