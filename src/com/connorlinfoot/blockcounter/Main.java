@@ -44,14 +44,19 @@ public class Main extends JavaPlugin implements Listener {
         if( item == null || item.getType() == Material.AIR ) return;
 
         if( item.getType().toString().toLowerCase().contains("pickaxe") ){
-            if( item.getItemMeta().getDisplayName().contains(ChatColor.GRAY + "[Blocks: ") ){
-                Integer place = item.getItemMeta().getDisplayName().lastIndexOf(ChatColor.GRAY + "[Blocks: ");
+            if( item.getItemMeta().getDisplayName().contains(ChatColor.GRAY + " [Blocks: ") ){
+                Integer place = item.getItemMeta().getDisplayName().lastIndexOf(ChatColor.GRAY + " [Blocks: ");
                 String itemName = item.getItemMeta().getDisplayName().substring(0, Math.min(item.getItemMeta().getDisplayName().length(), place));
-                Integer place2 = item.getItemMeta().getDisplayName().lastIndexOf("[Blocks: ");
-                Integer currentCount = Integer.valueOf(item.getItemMeta().getDisplayName().substring(0, Math.min(item.getItemMeta().getDisplayName().length(), place2 + 9)));
+                Integer place2 = item.getItemMeta().getDisplayName().lastIndexOf(" [Blocks: ");
+                Integer currentCount = Integer.valueOf(item.getItemMeta().getDisplayName().substring(0, Math.min(item.getItemMeta().getDisplayName().length(), place2 + 10)));
 
                 ItemMeta im = item.getItemMeta();
-                im.setDisplayName(itemName + ChatColor.GRAY + "[Blocks: " + (currentCount + 1) + "]" );
+                im.setDisplayName(itemName + ChatColor.GRAY + " [Blocks: " + (currentCount + 1) + "]" );
+                item.setItemMeta(im);
+                e.getPlayer().setItemInHand(item);
+            } else {
+                ItemMeta im = item.getItemMeta();
+                im.setDisplayName(im.getDisplayName() + ChatColor.GRAY + " [Blocks: 1]" );
                 item.setItemMeta(im);
                 e.getPlayer().setItemInHand(item);
             }
